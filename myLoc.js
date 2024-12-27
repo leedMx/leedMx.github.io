@@ -1,4 +1,4 @@
-window.onload = getMyLocation;
+// window.onload = getMyLocation;
 
 var ourCoords = {
     latitude: 47.624851,
@@ -8,6 +8,7 @@ var ourCoords = {
 var map;
 
 function getMyLocation() {
+    console.log("Calling getMyLocation");
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(displayLocation);
     } else {
@@ -24,8 +25,7 @@ function displayLocation(position) {
     var km = computeDistance(position.coords, ourCoords);
     var distance = document.getElementById("distance");
     distance.innerHTML = "You are " + km + " km from the WickedlySmart HQ";
-
-    showMap(position.coords)
+    showMap(position.coords);
 }
 
 function computeDistance(startCoords, destCoords) {
@@ -48,10 +48,12 @@ function degreesToRadians(degrees) {
 function showMap(coords) {
     var googleLatAndLong = new google.maps.LatLng(coords.latitude, coords.longitude);
     var mapOptions = {
-        zoom: 10,
+        zoom: 15,
         center: googleLatAndLong
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        // mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var mapDiv = document.getElementById("map");
     map = new google.maps.Map(mapDiv, mapOptions);
+    console.log(map)
+    console.log("finished showMap")
 }
